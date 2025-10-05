@@ -4,17 +4,21 @@ using back.Models.Response;
 using back.UseCases;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OrderSolution.API.Services.LoggedUser;
 
 namespace back.Controller
 {
     [ApiController]
     public class RegisterController : ControllerBase
     {
-        public RegisterController(NasaChallengeContextDb context)
+        private readonly NasaChallengeContextDb _context;
+        private readonly IHttpContextAccessor _httpContext;
+        public RegisterController(NasaChallengeContextDb context, IHttpContextAccessor httpcontext)
         {
             _context = context;
+            _httpContext = httpcontext;
         }
-        private readonly NasaChallengeContextDb _context;
+
 
         [ProducesResponseType(typeof(ResponseUserRegisterJson), StatusCodes.Status201Created)]
         [HttpPost]
@@ -34,6 +38,28 @@ namespace back.Controller
             var useCase = new UserUseCase();
             var response = useCase.Login(request, _context);
             return Created(String.Empty, response);
+        }
+
+        [HttpGet]
+        [Route("[controller]/GetUser")]
+        public IActionResult GetUser()
+        {
+            var loggedUser = new LoggedUser(_httpContext);
+            var userl = loggedUser.GetUser(_context);
+
+            var userDto = new ResponseUserDTO
+            {
+                Id = userl.Id,
+                Name = userl.Name,
+                City = userl.City,
+                Country = userl.Country,
+                Neighborhood = userl.Neighborhood,
+                Number = userl.Number,
+                State = userl.State,
+                Street = userl.Street
+            };
+
+            return Ok(userDto);
         }
     }
 }

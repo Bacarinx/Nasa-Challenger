@@ -2,8 +2,8 @@ using back.Context;
 using back.Models.Entities;
 using back.Models.Request;
 using back.Models.Response;
+using back.Token;
 using OrderSolution.API.Secutiry.Criptograph;
-using OrderSolution.API.Secutiry.Token;
 
 namespace back.UseCases
 {
@@ -31,16 +31,19 @@ namespace back.UseCases
             context.User.Add(newUser);
             context.SaveChanges();
 
-            foreach(var i in request.RespiratoryDiesies){
-                context.UserDisease.Add(new UserDiseases
-                {
-                    UserId = newUser.Id,
-                    DiseaseId = i
-                });
+            if(request.RespiratoryDiesies.Count > 0) {
+                foreach(var i in request.RespiratoryDiesies){
+                    context.UserDisease.Add(new UserDiseases
+                    {
+                        UserId = newUser.Id,
+                        DiseaseId = i
+                    });
+                }
             }
+            
             context.SaveChanges();
 
-            var tokenGenerator = new JwtToken();
+            var tokenGenerator = new TokenGenerator();
 
             return new ResponseUserRegisterJson
             {
@@ -51,7 +54,7 @@ namespace back.UseCases
          public ResponseUserRegisterJson Login(RequestLogin request, NasaChallengeContextDb context)
         {
             var Bcrypt = new BCryptCriptograph();
-            var token = new JwtToken();
+            var token = new TokenGenerator();
 
             var UserDb = context.User.FirstOrDefault(user => user.CPF == request.CPF);
             if (UserDb == null || !Bcrypt.Verify(request.Password, UserDb))

@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title mode="ios">SIGN IN</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title mode="ios">SIGN IN</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-list-header mode="ios" class="ion-no-padding">
+      <ion-label class="ion-text-center">Welcome back!</ion-label>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-input
+        label="CPF"
+        labelPlacement="floating"
+        [(ngModel)]="signInData.cpf"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        label="Password"
+        labelPlacement="floating"
+        [(ngModel)]="signInData.password"
+        type="password"
+      ></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <br /><br />
+
+  <div class="ion-text-center">
+    <a href="/sign-up" class="ion-text-center">Don't have an account?</a>
+  </div>
+
+  <br /><br />
+
+  <ion-button expand="block" (click)="signIn()">Login</ion-button>
+</ion-content>

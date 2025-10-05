@@ -1,0 +1,151 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title mode="ios">SIGN UP</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title mode="ios">SIGN UP</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-list-header mode="ios" class="ion-no-padding">
+      <ion-label class="ion-text-center">Personal</ion-label>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-input
+        label="Name"
+        labelPlacement="floating"
+        [(ngModel)]="signUpData.name"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        label="Phone Number"
+        labelPlacement="floating"
+        [(ngModel)]="signUpData.phoneNumber"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        label="Birth Date"
+        labelPlacement="floating"
+        type="date"
+        [(ngModel)]="signUpData.birthDate"
+      ></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header mode="ios" class="ion-no-padding">
+      <ion-label class="ion-text-center">Login</ion-label>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-input
+        label="CPF"
+        labelPlacement="floating"
+        [(ngModel)]="signUpData.cpf"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        label="Password"
+        labelPlacement="floating"
+        type="password"
+        [(ngModel)]="signUpData.password"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        label="Confirm Password"
+        labelPlacement="floating"
+        type="password"
+        [(ngModel)]="signUpData.password"
+      ></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header mode="ios" class="ion-no-padding">
+      <ion-label class="ion-text-center">Address</ion-label>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-input
+        label="Street"
+        labelPlacement="floating"
+        [(ngModel)]="signUpData.street"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        label="Number"
+        labelPlacement="floating"
+        [(ngModel)]="signUpData.number"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        label="Neighborhood"
+        labelPlacement="floating"
+        [(ngModel)]="signUpData.neighborhood"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        label="City"
+        labelPlacement="floating"
+        [(ngModel)]="signUpData.city"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        label="Country"
+        labelPlacement="floating"
+        [(ngModel)]="signUpData.country"
+      ></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header mode="ios" class="ion-no-padding">
+      <ion-label class="ion-text-center">Diseases</ion-label>
+    </ion-list-header>
+
+    <ion-item *ngFor="let disease of respiratoryDiseases; index as i">
+      <ion-checkbox
+        labelPlacement="end"
+        value="disease.id"
+        [(ngModel)]="isChecked[i]"
+        >{{disease.disease}}</ion-checkbox
+      >
+    </ion-item>
+  </ion-list>
+
+  <br /><br />
+
+  <div class="ion-text-center">
+    <a href="/sign-in" class="ion-text-center">Already registered?</a>
+  </div>
+
+  <br /><br />
+
+  <ion-button expand="block" (click)="signUp()">Register</ion-button>
+
+  <ion-button expand="block" color="danger" (click)="cancel()"
+    >Cancel</ion-button
+  >
+</ion-content>

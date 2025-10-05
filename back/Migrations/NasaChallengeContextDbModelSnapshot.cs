@@ -22,6 +22,35 @@ namespace back.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("back.Models.Entities.DependentRequest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Accepted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("RequestedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RequesterId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TargetId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RequesterId");
+
+                    b.HasIndex("TargetId");
+
+                    b.ToTable("DependentRequests");
+                });
+
             modelBuilder.Entity("back.Models.Entities.Dependents", b =>
                 {
                     b.Property<int>("Id")
@@ -191,6 +220,25 @@ namespace back.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserDisease");
+                });
+
+            modelBuilder.Entity("back.Models.Entities.DependentRequest", b =>
+                {
+                    b.HasOne("back.Models.Entities.User", "Requester")
+                        .WithMany()
+                        .HasForeignKey("RequesterId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("back.Models.Entities.User", "Target")
+                        .WithMany()
+                        .HasForeignKey("TargetId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Requester");
+
+                    b.Navigation("Target");
                 });
 
             modelBuilder.Entity("back.Models.Entities.Dependents", b =>

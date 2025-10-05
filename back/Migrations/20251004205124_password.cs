@@ -12,7 +12,7 @@ namespace back.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "Email",
-                table: "User");
+                table: "User"); 
 
             migrationBuilder.RenameColumn(
                 name: "Senha",

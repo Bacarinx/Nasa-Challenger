@@ -22,7 +22,7 @@ namespace OrderSolution.API.Services.LoggedUser
             jwtToken = jwtToken![6..].Trim();
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.ReadJwtToken(jwtToken);
-            var stringId = token.Claims.First(claim => claim.Type == "Id").Value;
+            var stringId = token.Claims.First(claim => claim.Type == "id").Value;
             var UserID = Convert.ToInt32(stringId);
 
             return dbContext.User.First(user => user.Id == UserID);

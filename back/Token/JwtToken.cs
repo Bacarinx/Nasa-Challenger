@@ -2,29 +2,30 @@ using back.Models.Entities;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text; 
 
-namespace OrderSolution.API.Secutiry.Token
+namespace back.Token
 {
-    public class JwtToken
+    public class TokenGenerator
     {
         public string Generate(User user)
         {
             var claims = new List<Claim>()
             {
-                new Claim("Id", user.Id.ToString())
+                new Claim("id", user.Id.ToString())
             };
 
-            var Symmetric = new SymetricGenerator();
+            var gerador = new SymetricGenerator();
 
-            var symetric = new SecurityTokenDescriptor()
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Expires = DateTime.UtcNow.AddDays(2),
-                SigningCredentials = new SigningCredentials(Symmetric.GetCredentials(), SecurityAlgorithms.HmacSha256Signature),
+                Expires = DateTime.UtcNow.AddMinutes(60),
+                SigningCredentials = new SigningCredentials(gerador.Generator(), SecurityAlgorithms.HmacSha256Signature),
                 Subject = new ClaimsIdentity(claims)
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();
-            var token = tokenHandler.CreateToken(symetric);
+            var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
     }
