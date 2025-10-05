@@ -1,11 +1,11 @@
 
 const EARTH_RADIUS = 6378137; // in meters (WGS84)
 function offsetCoord(lat, lon, dx, dy) {
-  const dLat = dy / EARTH_RADIUS;
-  const dLon = dx / (EARTH_RADIUS * Math.cos((Math.PI / 180) * lat));
+  const dLat = dy / 111320;
+  const dLon = dx / (111320 * Math.cos((Math.PI / 180) * lat));
 
-  const newLat = lat + (dLat * 180) / Math.PI;
-  const newLon = lon + (dLon * 180) / Math.PI;
+  const newLat = lat + dLat;
+  const newLon = lon + dLat;
 
   return { lat: newLat, lon: newLon };
 }
@@ -47,7 +47,7 @@ async function fetchJson(url, headers = {}) {
 
         res.on('end', () => {
           try {
-            console.log(data);
+            // console.log(data);
 
             const json = JSON.parse(data);
             resolve(json);
@@ -79,31 +79,55 @@ async function fetchJson(url, headers = {}) {
 }
 const key = "685a4eafe8ac47a89f1486b774c20dd33aa4acfe33659ee0b9978c92bf5396e0";
 
-function get_map(coordx, coordy, precision) {
-    coords1 = offsetCoord(coordx, coordy, -precision, -precision);
-    coords2 = offsetCoord(coordx, coordy, precision, precision);
+async function get_ids(coordx, coordy, precision) {
+    let coords1 = offsetCoord(coordx, coordy, -precision, -precision);
+    let coords2 = offsetCoord(coordx, coordy, precision, precision);
 
     const url = `https://api.openaq.org/v3/locations?parameters_id=2&bbox=${coords1.lat},${coords1.lon},${coords2.lat},${coords2.lon}&limit=${20}`;
 
-    // const url = `https://api.openaq.org/v3/locations?parameters_id=2&bbox=${coordx},${coordy},${coords2.lat},${coords2.lon}&limit=${20}`;
-
       console.log(url);
-    return fetchJson(url, {"X-API-Key": key}) 
+      let ids = [];
+      await fetchJson(url, {"X-API-Key": key}) 
     .then(data => {
-        // console.log(url);
-          // array = data.result;
-          // let array2 = [];
-          // array.forEach((element, index) => {
-          //     console.log(`Index ${index}:`, element);
-          // });
-          // array2.sort((a, b) => {return a - b});
+          data.results.forEach((element, index) => {
+              console.log(`Index ${index}:`, element.id);
+              ids.push(id);
+          });
+          // return ids;
       })
 
       .catch(err => {
           // console.log(err);
-          return {};
+          return [];
       });
+      return ids;
+
 }
 
-get_map(-118.668153, 33.703935, 25000);
+async function get_map(coordx, coordy, precision) {
+    const ids = await get_ids(coordx, coordy, precision);
+    let array = [];
+
+        console.log(ids);
+    ids.forEach((id, index) => {
+        // console.log(ids);
+        const url = `https://api.openaq.org/v3/locations/${id}/latest?limit=${1}`;
+        array.push(fetchJson(url, {"X-API-Key": key}) 
+        .then(data => {
+              // console.log(err);
+              console.log(data);
+              console.log(data, "  aquiiiii");
+          })
+
+          .catch(err => {
+              console.log(err,  "  aquiiiii");
+              return [];
+          }))
+    });
+
+    await Promise.all(array);
+
+}
+
+get_map(-118.6681, 33.7039, 50000);
 
