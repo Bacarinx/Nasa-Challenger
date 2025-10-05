@@ -168,5 +168,10 @@
 /home/henriquebacarin/study/nasa-challenger/back/obj/Debug/net9.0/back.pdb
 /home/henriquebacarin/study/nasa-challenger/back/obj/Debug/net9.0/back.genruntimeconfig.cache
 /home/henriquebacarin/study/nasa-challenger/back/obj/Debug/net9.0/ref/back.dll
-/home/henriquebacarin/study/nasa-challenger/back/bin/Debug/net9.0/DevOne.Security.Cryptography.BCrypt.dll
 /home/henriquebacarin/study/nasa-challenger/back/bin/Debug/net9.0/BCrypt.Net-Next.dll
+/home/henriquebacarin/study/nasa-challenger/back/bin/Debug/net9.0/Microsoft.AspNetCore.Connections.Abstractions.dll
+/home/henriquebacarin/study/nasa-challenger/back/bin/Debug/net9.0/Microsoft.AspNetCore.SignalR.Common.dll
+/home/henriquebacarin/study/nasa-challenger/back/bin/Debug/net9.0/Microsoft.AspNetCore.SignalR.Protocols.Json.dll
+/home/henriquebacarin/study/nasa-challenger/back/bin/Debug/net9.0/Microsoft.Extensions.Features.dll
+/home/henriquebacarin/study/nasa-challenger/back/bin/Debug/net9.0/Newtonsoft.Json.dll
+/home/henriquebacarin/study/nasa-challenger/back/bin/Debug/net9.0/System.Net.WebSockets.WebSocketProtocol.dll

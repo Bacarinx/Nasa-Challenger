@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using back.Context;
 
@@ -11,9 +12,11 @@ using back.Context;
 namespace back.Migrations
 {
     [DbContext(typeof(NasaChallengeContextDb))]
-    partial class NasaChallengeContextDbModelSnapshot : ModelSnapshot
+    [Migration("20251005112623_dependentsRequestr")]
+    partial class dependentsRequestr
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

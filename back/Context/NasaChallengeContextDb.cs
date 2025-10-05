@@ -10,12 +10,11 @@ namespace back.Context
     public class NasaChallengeContextDb : DbContext
     {
         public NasaChallengeContextDb(DbContextOptions<NasaChallengeContextDb> opt) : base(opt) { }
-
         public required DbSet<User> User { get; set; }
         public required DbSet<Dependents> Dependent { get; set; }
         public required DbSet<RespiratoryDiseases> RespiratoryDisease { get; set; }
         public required DbSet<UserDiseases> UserDisease { get; set; }
-
+        public required DbSet<DependentRequest> DependentRequests { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Dependents>()
@@ -37,6 +36,18 @@ namespace back.Context
                 .HasForeignKey(p => p.DiseaseId)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            modelBuilder.Entity<DependentRequest>()
+                .HasOne(p => p.Requester)
+                .WithMany()
+                .HasForeignKey(p => p.RequesterId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<DependentRequest>()
+                .HasOne(p => p.Target)
+                .WithMany()
+                .HasForeignKey(p => p.TargetId)
+                .OnDelete(DeleteBehavior.NoAction);
+
             modelBuilder.Entity<RespiratoryDiseases>().HasData(
             new RespiratoryDiseases { Id = 1, Disease = "Asthma" },
             new RespiratoryDiseases { Id = 2, Disease = "Chronic Obstructive Pulmonary Disease (COPD)" },
@@ -48,7 +59,6 @@ namespace back.Context
             new RespiratoryDiseases { Id = 8, Disease = "Pharyngitis" },
             new RespiratoryDiseases { Id = 9, Disease = "Acute Bronchitis" },
             new RespiratoryDiseases { Id = 10, Disease = "Pneumonia" }
-
         );
         }
     }

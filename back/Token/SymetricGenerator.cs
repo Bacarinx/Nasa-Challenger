@@ -1,14 +1,14 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace OrderSolution.API.Secutiry.Token
+namespace back.Token
 {
     public class SymetricGenerator
     {
-        public SymmetricSecurityKey GetCredentials()
+        public SymmetricSecurityKey Generator()
         {
-            var key = "jkS89d2oASD21akolsdsAW1208AOSJNDw31982ajsdc210asojd2981";
-            var securityKey = Encoding.UTF8.GetBytes(key);
+            var secretKey = "1234567890ABCDEFGHIJKLMNOPQRSTUV";
+            var securityKey = Encoding.UTF8.GetBytes(secretKey);
             return new SymmetricSecurityKey(securityKey);
         }
     }
