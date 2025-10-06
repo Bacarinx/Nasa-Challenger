@@ -35,3 +35,34 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+body.scanner-active {
+  --background: transparent !important;
+  background-color: transparent !important;
+}
+
+body.scanner-active ion-app,
+body.scanner-active ion-content,
+body.scanner-active ion-router-outlet {
+  --background: transparent !important;
+  background-color: transparent !important;
+}
+
+.gm-style-iw-c {
+  padding: 0 !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
+
+.gm-style-iw-d {
+  overflow: hidden !important;
+}
+
+.gm-style-iw-t::after {
+  display: none;
+}
+
+.gm-ui-hover-effect {
+  display: none !important;
+}
