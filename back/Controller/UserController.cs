@@ -51,6 +51,7 @@ namespace back.Controller
             {
                 Id = userl.Id,
                 Name = userl.Name,
+                Cpf = userl.CPF,
                 City = userl.City,
                 Country = userl.Country,
                 Neighborhood = userl.Neighborhood,

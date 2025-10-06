@@ -1,0 +1,22 @@
+<ion-menu contentId="main-content" type="overlay">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item
+        *ngFor="let p of appPages"
+        [routerLink]="p.url"
+        routerDirection="root"
+        lines="none"
+        detail="false"
+        (click)="closeMenu()"
+      >
+        <ion-icon slot="start" [name]="p.icon + '-outline'"></ion-icon>
+        <ion-label>{{ p.title }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>

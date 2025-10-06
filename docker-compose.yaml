@@ -1,0 +1,16 @@
+services:
+    sqlserver:
+        image: mcr.microsoft.com/mssql/server
+        container_name: sqlserver
+        environment:
+            MSSQL_PID: "Developer"
+            SA_PASSWORD: "Bacarin54"
+            ACCEPT_EULA: "Y"
+        ports:
+            - "1433:1433"
+        volumes:
+            - bd-data:/var/opt/mssql
+        restart: unless-stopped
+
+volumes:
+    bd-data:

@@ -18,6 +18,8 @@ export class SignInPage implements OnInit {
     password: '',
   };
 
+  showPassword = false;
+
   constructor(
     private readonly _signInService: SignInService,
     private readonly _jwtService: JwtService,
@@ -36,5 +38,9 @@ export class SignInPage implements OnInit {
         this._router.navigate(['home']);
       },
     });
+  }
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
   }
 }

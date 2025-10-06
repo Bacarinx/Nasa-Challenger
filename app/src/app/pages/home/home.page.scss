@@ -1,0 +1,17 @@
+.search-bar {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background: var(--ion-color-light);
+}
+
+.aqi-value-marker {
+  padding: 2px 5px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  border: 1px solid white;
+}

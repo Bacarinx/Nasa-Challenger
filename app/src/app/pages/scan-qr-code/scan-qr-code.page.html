@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title mode="ios">ADD SHARED PROFILE</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div [hidden]="isScanning" class="content-wrapper">
+    <div *ngIf="!scanCompleted" class="container">
+      <ion-icon name="qr-code-outline" class="main-icon"></ion-icon>
+      <h2 class="ion-text-center">Scan a QR Code</h2>
+      <p class="ion-text-center ion-padding-horizontal">
+        Point your camera at a QR code to automatically scan it.
+      </p>
+    </div>
+
+    <div *ngIf="scanCompleted" class="container">
+      <ion-icon
+        name="checkmark-circle-outline"
+        color="success"
+        class="main-icon"
+      ></ion-icon>
+      <h1 class="ion-text-center">Request Sent</h1>
+      <ion-button fill="clear" (click)="resetScan()" class="ion-margin-top">
+        Scan Another
+      </ion-button>
+    </div>
+  </div>
+
+  <div *ngIf="isScanning" class="scan-frame-wrapper">
+    <div class="scan-frame"></div>
+    <div class="scan-text">
+      <p>Position QR code within the frame</p>
+      <ion-button fill="clear" color="light" (click)="stopScan()">
+        Cancel Scan
+      </ion-button>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer *ngIf="!scanCompleted && !isScanning">
+  <ion-toolbar>
+    <ion-button expand="block" (click)="startScan()" class="ion-margin">
+      <ion-icon slot="start" name="camera-outline"></ion-icon>
+      Start Scan
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

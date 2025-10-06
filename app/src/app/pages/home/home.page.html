@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Air Quality Map</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <google-map height="100%" width="100%" [options]="options">
+    <map-advanced-marker
+      *ngIf="userMarkerPosition"
+      [position]="userMarkerPosition"
+    ></map-advanced-marker>
+
+    <ng-container *ngFor="let point of airQualityPoints">
+      <map-circle [options]="getCircleOptions(point)"></map-circle>
+    </ng-container>
+  </google-map>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="recenterMap()" title="Center on my location">
+      <ion-icon name="locate-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

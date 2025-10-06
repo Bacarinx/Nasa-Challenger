@@ -1,0 +1,22 @@
+.content-wrapper {
+  height: 100%;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-icon {
+  font-size: 96px;
+  margin-bottom: 16px;
+}
+
+ion-footer {
+  ion-toolbar {
+    --border-width: 0;
+  }
+}
