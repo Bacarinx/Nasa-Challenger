@@ -11,9 +11,16 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 
+import { SidebarMenuComponent } from './shared/components/sidebar-menu/sidebar-menu.component';
+
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    SidebarMenuComponent,
+  ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideHttpClient(withInterceptorsFromDi()),

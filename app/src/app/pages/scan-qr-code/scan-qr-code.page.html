@@ -1,5 +1,9 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+
     <ion-title mode="ios">ADD SHARED PROFILE</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -21,6 +25,19 @@
         class="main-icon"
       ></ion-icon>
       <h1 class="ion-text-center">Request Sent</h1>
+      <ion-button fill="clear" (click)="resetScan()" class="ion-margin-top">
+        Scan Another
+      </ion-button>
+    </div>
+  </div>
+
+  <div *ngIf="isScanning" class="scan-frame-wrapper">
+    <div class="scan-frame"></div>
+    <div class="scan-text">
+      <p>Position QR code within the frame</p>
+      <ion-button fill="clear" color="light" (click)="stopScan()">
+        Cancel Scan
+      </ion-button>
     </div>
   </div>
 </ion-content>
