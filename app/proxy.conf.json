@@ -1,0 +1,11 @@
+{
+  "/openaq-api": {
+    "target": "https://api.openaq.org",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/openaq-api": ""
+    }
+  }
+}
