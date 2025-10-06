@@ -1,0 +1,84 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title mode="ios">CONTACTS</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title mode="ios">CONTACTS</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-list-header mode="ios" class="ion-no-padding">
+      <ion-label class="ion-text-center">Emergency</ion-label>
+    </ion-list-header>
+
+    <ion-item *ngFor="let p of contacts" button="true" href="tel:{{p.phone}}">
+      <ion-icon
+        name="person-circle-outline"
+        slot="start"
+        color="primary"
+      ></ion-icon>
+      <ion-label>
+        <h2>{{p.name}}</h2>
+        <p>{{p.phone}}</p>
+      </ion-label>
+      <ion-icon name="call-outline" slot="end" color="success"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+  <br />
+
+  <ion-list *ngIf="accepted.length !== 0">
+    <ion-list-header mode="ios" class="ion-no-padding">
+      <ion-label class="ion-text-center">Contacts</ion-label>
+    </ion-list-header>
+
+    <ion-item
+      *ngFor="let p of accepted"
+      button="true"
+      href="tel:{{p.requester.phoneNumber}}"
+    >
+      <ion-icon
+        name="person-circle-outline"
+        slot="start"
+        color="primary"
+      ></ion-icon>
+      <ion-label>
+        <h2>{{p.requester.name}}</h2>
+        <p>{{p.requester.phoneNumber}}</p>
+      </ion-label>
+      <ion-icon name="call-outline" slot="end" color="success"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+  <br />
+
+  <ion-list *ngIf="toAccept.length !== 0">
+    <ion-list-header mode="ios" class="ion-no-padding">
+      <ion-label class="ion-text-center">Requests</ion-label>
+    </ion-list-header>
+
+    <ion-item *ngFor="let p of toAccept">
+      <ion-icon
+        name="person-circle-outline"
+        slot="start"
+        color="primary"
+      ></ion-icon>
+      <ion-label>
+        <h2>{{p.requester.name}}</h2>
+        <p>{{p.requester.phoneNumber}}</p>
+      </ion-label>
+      <ion-icon
+        name="add-outline"
+        slot="end"
+        color="success"
+        (click)="accept(p.id)"
+      ></ion-icon>
+      <ion-icon name="remove-outline" slot="end" color="danger"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>
