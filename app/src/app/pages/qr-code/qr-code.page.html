@@ -1,0 +1,34 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title mode="ios">SHARE PROFILE</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div
+    style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    "
+  >
+    <ion-card class="ion-text-center ion-padding">
+      <ion-card-header>
+        <ion-card-title>Scan to Connect!</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p class="ion-padding-bottom">
+          Let others scan this code to connect with you instantly.
+        </p>
+
+        <qrcode
+          [qrdata]="qrCodeValue"
+          [width]="256"
+          [errorCorrectionLevel]="'M'"
+        ></qrcode>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
