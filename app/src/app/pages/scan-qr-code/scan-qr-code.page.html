@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title mode="ios">ADD SHARED PROFILE</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div [hidden]="isScanning" class="content-wrapper">
+    <div *ngIf="!scanCompleted" class="container">
+      <ion-icon name="qr-code-outline" class="main-icon"></ion-icon>
+      <h2 class="ion-text-center">Scan a QR Code</h2>
+      <p class="ion-text-center ion-padding-horizontal">
+        Point your camera at a QR code to automatically scan it.
+      </p>
+    </div>
+
+    <div *ngIf="scanCompleted" class="container">
+      <ion-icon
+        name="checkmark-circle-outline"
+        color="success"
+        class="main-icon"
+      ></ion-icon>
+      <h1 class="ion-text-center">Request Sent</h1>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer *ngIf="!scanCompleted && !isScanning">
+  <ion-toolbar>
+    <ion-button expand="block" (click)="startScan()" class="ion-margin">
+      <ion-icon slot="start" name="camera-outline"></ion-icon>
+      Start Scan
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
