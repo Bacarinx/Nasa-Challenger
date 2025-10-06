@@ -19,10 +19,27 @@ export class ContactsPage implements OnInit {
   accepted: ConnectionRequest[] = [];
   toAccept: ConnectionRequest[] = [];
 
-  contacts: Contact[] = [
+  emergencyContacts = [
     {
-      name: 'Bombeiros',
-      phone: '193',
+      name: 'Fire Dept. / Paramedics',
+      phone: '911',
+      details: 'For immediate respiratory distress or rescue.',
+      icon: 'flame-outline', // Icon for fire department
+      color: 'danger',
+    },
+    {
+      name: 'Poison Control',
+      phone: '1-800-222-1222',
+      details: 'For exposure to airborne toxins or chemicals.',
+      icon: 'flask-outline',
+      color: 'warning',
+    },
+    {
+      name: 'EPA Environmental Violations',
+      phone: '1-800-424-8802',
+      details: 'Report major air or water pollution.',
+      icon: 'leaf-outline',
+      color: 'success',
     },
   ];
 
@@ -46,6 +63,19 @@ export class ContactsPage implements OnInit {
     this.update();
   }
 
+  getInitials(name: string): string {
+    if (!name) {
+      return '';
+    }
+    const nameParts = name.trim().split(' ');
+    if (nameParts.length === 1) {
+      return nameParts[0].charAt(0).toUpperCase();
+    }
+    const firstNameInitial = nameParts[0].charAt(0);
+    const lastNameInitial = nameParts[nameParts.length - 1].charAt(0);
+    return (firstNameInitial + lastNameInitial).toUpperCase();
+  }
+
   accept(id: number): void {
     this._dependentsService.accept(id).subscribe({
       next: (response) => {
@@ -57,5 +87,9 @@ export class ContactsPage implements OnInit {
         this.update();
       },
     });
+  }
+
+  reject(id: number) {
+    console.log(`Rejected request with ID: ${id}`);
   }
 }
